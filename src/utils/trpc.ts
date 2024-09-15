@@ -96,10 +96,6 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
     };
   },
   /**
-   * @link https://trpc.io/docs/v11/ssr
-   */
-  ssr: false,
-  /**
    * @link https://trpc.io/docs/v11/data-transformers
    */
   transformer,

@@ -9,7 +9,7 @@
 
 Setup DB and backend side:
 
-- You need to install docker, you can download here: https://www.docker.com/
+- You need to install docker, you can download here: [https://www.docker.com/]
 - Run `docker compose up` to run the postgresDB, you can go to docker-compose.yml to update password if you want and don't forget to update `.env` file.
 - Run `pnpm install` to install all needed dependencies
 

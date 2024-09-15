@@ -27,3 +27,13 @@ export async function createContext(
 
   return await createContextInner({});
 }
+
+import { FetchCreateContextFnOptions } from '@trpc/server/adapters/fetch';
+
+export function createContextEdge({
+  req,
+  resHeaders,
+}: FetchCreateContextFnOptions) {
+  const user = { name: req.headers.get('username') ?? 'anonymous' };
+  return { req, resHeaders, user };
+}
