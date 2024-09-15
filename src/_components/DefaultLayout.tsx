@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
+import BottomBar from './ui/BottomBar';
 
 type DefaultLayoutProps = { children: ReactNode };
 
@@ -12,6 +13,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       </Head>
 
       <main className="h-screen">{children}</main>
+      <BottomBar />
     </>
   );
 };

@@ -1,9 +1,8 @@
 import { CategoryRail } from '~/_components/ui/Category/CategoryRail';
 import { SearchBox } from '~/_components/ui/SearchBox.tsx';
 import { FoodCard } from '~/_components/ui/FoodCard';
-import BottomBar from '~/_components/ui/BottomBar';
 import { trpc } from '~/utils/trpc';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { STORE_CATEGORY } from '~/constants/category';
 import { SpinLoading } from '~/_components/ui/SpinLoading';
 
@@ -16,7 +15,14 @@ const HomePage = () => {
     category: currentCategory,
   });
 
-  const onFavoriteClick = trpc.restaurant.addFavorite.useMutation();
+  const favoriteClick = trpc.restaurant.addFavorite.useMutation();
+  const onFavoriteClick = useCallback(
+    async (id: string) => {
+      await favoriteClick.mutateAsync({ id });
+      await restaurantsRes.refetch();
+    },
+    [favoriteClick, restaurantsRes],
+  );
 
   const restaurantListRenderer = useMemo(() => {
     if (restaurantsRes.isLoading) {
@@ -31,10 +37,7 @@ const HomePage = () => {
         return restaurantsRes.data.map((restaurant) => (
           <div key={restaurant.id} className="mb-7">
             <FoodCard
-              onFavoriteClick={async (id) => {
-                await onFavoriteClick.mutateAsync({ id });
-                restaurantsRes.refetch();
-              }}
+              onFavoriteClick={onFavoriteClick}
               featured={{
                 text: restaurant.featuredText,
                 icon: restaurant.featuredIcon,
@@ -51,7 +54,7 @@ const HomePage = () => {
         );
       }
     }
-  }, [onFavoriteClick, restaurantsRes]);
+  }, [onFavoriteClick, restaurantsRes.data, restaurantsRes.isLoading]);
 
   return (
     <div className="mt-8 pb-16">
@@ -67,7 +70,6 @@ const HomePage = () => {
         />
       </section>
       <section id="list">{restaurantListRenderer}</section>
-      <BottomBar />
     </div>
   );
 };
