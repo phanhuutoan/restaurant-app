@@ -7,19 +7,20 @@ import { upperFirst } from 'lodash';
 
 interface CardProps {
   rating: number;
-  rating_count: number;
+  ratingCount: number;
   category: string;
   city: string;
   desc: string;
   id: string;
   images: string[];
   name: string;
-  price_range: string;
+  priceRange: string;
   featured: {
     text: string;
     icon: string;
   };
   isFavorite: boolean;
+  onFavoriteClick: (id: string) => void;
 }
 
 const PRICE_UNIT = '원의'; // won
@@ -30,12 +31,14 @@ export const FoodCard = (props: CardProps) => {
     name,
     featured,
     rating,
-    rating_count,
+    ratingCount,
     desc,
     city,
     category,
-    price_range,
+    priceRange,
     isFavorite,
+    onFavoriteClick,
+    id,
   } = props;
 
   return (
@@ -46,7 +49,10 @@ export const FoodCard = (props: CardProps) => {
           alt={name}
           className="rounded-xl w-full object-cover h-48"
         />
-        <div className="absolute top-2 right-2 h-10 w-10 rounded-full backdrop-blur-md flex items-center justify-center">
+        <div
+          onClick={() => onFavoriteClick(id)}
+          className="absolute top-2 right-2 h-10 w-10 rounded-full backdrop-blur-md flex items-center justify-center"
+        >
           {isFavorite ? (
             <FaHeart className="text-white h-5 w-5" />
           ) : (
@@ -63,7 +69,7 @@ export const FoodCard = (props: CardProps) => {
         <div className="flex items-center">
           <FaStar className="text-orange-300 h-4 w-4 ml-1 mr-1" />
           <p>
-            {rating ?? '-'}({rating_count ?? 0})
+            {rating ?? '-'}({ratingCount ?? 0})
           </p>
         </div>
       </div>
@@ -74,7 +80,7 @@ export const FoodCard = (props: CardProps) => {
         <p className="mr-1">{upperFirst(city)} ·</p>
         <p className="mr-1">{upperFirst(category.toLowerCase())} ·</p>
         <p>
-          {price_range}
+          {priceRange}
           {PRICE_UNIT}
         </p>
       </div>

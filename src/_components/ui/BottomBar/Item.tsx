@@ -15,7 +15,7 @@ export const Item = ({ icon, title, isActive }: ItemProps) => {
   return (
     <div className={itemClassName}>
       {icon}
-      <p>{title}</p>
+      <p className="text-xs">{title}</p>
     </div>
   );
 };

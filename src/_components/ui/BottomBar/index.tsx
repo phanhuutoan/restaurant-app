@@ -1,31 +1,34 @@
 import classNames from 'classnames';
-import { FaHome } from 'react-icons/fa';
 import { Item } from './Item';
+import { RiHome6Line, RiSearchLine } from 'react-icons/ri';
+import { PiChatText } from 'react-icons/pi';
+import { IoCalendarClearOutline } from 'react-icons/io5';
+import { IoMdMenu } from 'react-icons/io';
 
 const BottomBar = () => {
   const itemClassName = classNames('h-6', 'w-6', 'text-inherit');
 
   const listItems = [
     {
-      icon: <FaHome className={itemClassName} />,
-      title: 'Home',
+      icon: <RiHome6Line className={itemClassName} />,
+      title: '홈',
     },
     {
-      icon: <FaHome className={itemClassName} />,
-      title: 'Should',
+      icon: <RiSearchLine className={itemClassName} />,
+      title: '검색',
       isActive: true,
     },
     {
-      icon: <FaHome className={itemClassName} />,
-      title: 'Home',
+      icon: <PiChatText className={itemClassName} />,
+      title: '피드',
     },
     {
-      icon: <FaHome className={itemClassName} />,
-      title: 'Home',
+      icon: <IoCalendarClearOutline className={itemClassName} />,
+      title: '내 예약',
     },
     {
-      icon: <FaHome className={itemClassName} />,
-      title: 'Home',
+      icon: <IoMdMenu className={itemClassName} />,
+      title: '메뉴',
     },
   ];
 

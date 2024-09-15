@@ -2,13 +2,13 @@ import classNames from 'classnames';
 
 interface CategoryItemProps {
   name: string;
-  id?: string;
+  onClick: (categoryId: string) => void;
+  id: string;
   isActive?: boolean;
-  onClick?: () => void;
 }
 
 export const CategoryItem = (props: CategoryItemProps) => {
-  const { name, onClick, isActive } = props;
+  const { name, onClick, isActive, id } = props;
   const itemClassNames = classNames(
     ['px-3', 'py-2', 'font-semibold', 'text-slate-500', 'rounded-md'],
     {
@@ -18,7 +18,12 @@ export const CategoryItem = (props: CategoryItemProps) => {
   );
 
   return (
-    <button onClick={onClick} className={itemClassNames}>
+    <button
+      onClick={() => {
+        onClick(id);
+      }}
+      className={itemClassNames}
+    >
       {name}
     </button>
   );

@@ -2,12 +2,12 @@
  * This file contains the root router of your tRPC-backend
  */
 import { createCallerFactory, publicProcedure, router } from '../trpc';
-import { postRouter } from './post';
+import { restaurantRouter } from './restaurants';
 
 export const appRouter = router({
   healthcheck: publicProcedure.query(() => "yay! I' m fine"),
 
-  post: postRouter,
+  restaurant: restaurantRouter,
 });
 
 export const createCaller = createCallerFactory(appRouter);
