@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { FaStar } from 'react-icons/fa';
 import { getIconByFeature } from '~/_utils/getIconByFeature';
 import { truncateText } from '~/_utils/truncateText';
 import { upperFirst } from 'lodash';
+import { SpinLoading } from '../SpinLoading';
 
 interface CardProps {
   rating: number;
@@ -20,7 +21,7 @@ interface CardProps {
     icon: string;
   };
   isFavorite: boolean;
-  onFavoriteClick: (id: string) => void;
+  onFavoriteClick: (id: string) => Promise<void>;
 }
 
 const PRICE_UNIT = '원의'; // won
@@ -41,6 +42,24 @@ export const FoodCard = (props: CardProps) => {
     id,
   } = props;
 
+  const [loading, setLoading] = React.useState(false);
+
+  const favoriteHandler = async () => {
+    setLoading(true);
+    await onFavoriteClick(id);
+    setLoading(false);
+  };
+
+  const heartRenderer = useMemo(() => {
+    if (loading) {
+      return <SpinLoading classNames="text-white h-5 w-5" />;
+    }
+    if (isFavorite) {
+      return <FaHeart className="text-white h-5 w-5" />;
+    }
+    return <FaRegHeart className="text-white h-5 w-5" />;
+  }, [isFavorite, loading]);
+
   return (
     <div className="text-slate-900">
       <div className="relative my-1">
@@ -50,14 +69,10 @@ export const FoodCard = (props: CardProps) => {
           className="rounded-xl w-full object-cover h-48"
         />
         <div
-          onClick={() => onFavoriteClick(id)}
+          onClick={favoriteHandler}
           className="absolute top-2 right-2 h-10 w-10 rounded-full backdrop-blur-md flex items-center justify-center"
         >
-          {isFavorite ? (
-            <FaHeart className="text-white h-5 w-5" />
-          ) : (
-            <FaRegHeart className="text-white h-5 w-5" />
-          )}
+          {heartRenderer}
         </div>
       </div>
       <div className="flex text-orange-500 mt-2 my-2">

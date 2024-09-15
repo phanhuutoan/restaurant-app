@@ -5,6 +5,7 @@ import BottomBar from '~/_components/ui/BottomBar';
 import { trpc } from '~/utils/trpc';
 import { useMemo, useState } from 'react';
 import { STORE_CATEGORY } from '~/constants/category';
+import { SpinLoading } from '~/_components/ui/SpinLoading';
 
 const HomePage = () => {
   const [currentCategory, setCurrentCategory] = useState<STORE_CATEGORY>(
@@ -19,7 +20,12 @@ const HomePage = () => {
 
   const restaurantListRenderer = useMemo(() => {
     if (restaurantsRes.isLoading) {
-      return <div className="text-lg text-slate-800">Loading...</div>;
+      return (
+        <div className="text-lg text-slate-800 flex items-center">
+          <SpinLoading classNames="mr-4" />
+          <p>로딩 중...</p>
+        </div>
+      );
     } else {
       if (restaurantsRes.data && restaurantsRes.data.length > 0) {
         return restaurantsRes.data.map((restaurant) => (
@@ -39,7 +45,9 @@ const HomePage = () => {
         ));
       } else {
         return (
-          <div className="text-xl text-slate-800 font-semibold">No data</div>
+          <div className="text-xl text-slate-800 font-semibold">
+            데이터를 찾을 수 없습니다!
+          </div>
         );
       }
     }
