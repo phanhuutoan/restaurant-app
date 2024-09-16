@@ -26,7 +26,7 @@ export const CategoryRail = ({
   );
 
   return (
-    <div className="flex flex-row w-full overflow-auto py-1">
+    <div className="flex flex-row w-full overflow-auto no-scrollbar py-1">
       {listCategory}
     </div>
   );

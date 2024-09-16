@@ -66,7 +66,7 @@ export const FoodCard = (props: CardProps) => {
         <img
           src={images[0]}
           alt={name}
-          className="rounded-xl w-full object-cover h-48"
+          className="rounded-xl w-full object-cover h-44"
         />
         <div
           onClick={favoriteHandler}
