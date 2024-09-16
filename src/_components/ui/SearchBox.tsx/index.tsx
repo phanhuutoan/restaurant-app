@@ -16,7 +16,7 @@ export const SearchBox = (props: PropsTypes) => {
     }
   };
   return (
-    <div className="flex flex-row px-4 py-2 bg-white shadow-md rounded-md text-slate-400 items-center bg-slate-100">
+    <div className="flex flex-row px-4 py-2 shadow-md rounded-md text-slate-400 items-center bg-slate-100">
       <div className="mr-2">
         <IoSearchOutline color="inherit" className="h-6 w-6" />
       </div>

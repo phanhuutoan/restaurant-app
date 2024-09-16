@@ -9,10 +9,8 @@
 
 Setup DB and backend side:
 
-- You need to install docker, you can download here: [https://www.docker.com/]
-- Run `docker compose up` to run the postgresDB, you can go to docker-compose.yml to update password if you want to.
 - Run `pnpm install` to install all needed dependencies
-- Because we setup this project with tRPC run in edge runtime so go through this article to setup accelerator of prisma which makes it able to run on edge runtime: [https://www.prisma.io/docs/accelerate/getting-started]
+- Because we setup this project with tRPC run in edge runtime so go through this article to setup your accelerator of prisma which makes it able to run on edge runtime: [https://www.prisma.io/docs/accelerate/getting-started]
 - Next: add .env file in your project based on .env.example file
 - Or you can use my credentials, plz DM me.
 
